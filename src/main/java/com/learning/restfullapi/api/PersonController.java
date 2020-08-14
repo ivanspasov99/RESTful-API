@@ -11,7 +11,6 @@ import java.util.UUID;
 
 // manages CRUD
 
-
 @RestController
 public class PersonController {
     private final PersonService personService;
@@ -27,8 +26,8 @@ public class PersonController {
     }
 
     @PutMapping(path = "api/updatePerson/{id}")
-    public int updatePersonById(@PathVariable("id") UUID id, @RequestBody Person person) {
-        return personService.updatePersonById(id, person);
+    public void updatePersonById(@PathVariable("id") UUID id, @RequestBody Person person) {
+        personService.updatePersonById(id, person);
     }
 
     @GetMapping(path = "api/getAllPeople")
