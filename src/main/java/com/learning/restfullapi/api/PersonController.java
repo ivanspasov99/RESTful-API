@@ -1,13 +1,12 @@
 package com.learning.restfullapi.api;
 
-import com.learning.restfullapi.model.Person;
+import com.learning.restfullapi.model.Post;
 import com.learning.restfullapi.service.PersonService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.UUID;
 
 // manages CRUD
 
@@ -20,29 +19,29 @@ public class PersonController {
         this.personService = personService;
     }
 
-    @PostMapping("api/insertPerson")
-    public void insertPerson(@RequestBody Person person) {
-        personService.insertPerson(person);
+    @PostMapping("api/insertPost")
+    public void insertPost(@RequestBody Post post) {
+        personService.insertPost(post);
     }
 
-    @PutMapping(path = "api/updatePerson/{id}")
-    public void updatePersonById(@PathVariable("id") UUID id, @RequestBody Person person) {
-        personService.updatePersonById(id, person);
+    @PutMapping(path = "api/updatePost/{id}")
+    public void updatePostById(@PathVariable("id") int id, @RequestBody Post post) {
+        personService.updatePostById(id, post);
     }
 
-    @GetMapping(path = "api/getAllPeople")
-    public List<Person> getAllPeople() {
-        return personService.getAllPeople();
+    @GetMapping(path = "api/getPosts")
+    public List<Post> getPosts() {
+        return personService.getPosts();
     }
 
-    @GetMapping(path = "api/getPerson/{id}")
-    public Person getPersonById(@PathVariable("id") UUID id) {
-        return personService.getPersonById(id);
+    @GetMapping(path = "api/getPost/{id}")
+    public Post getPostById(@PathVariable("id") int id) {
+        return personService.getPostById(id);
     }
 
-    @DeleteMapping(path = "api/deletePerson/{id}")
-    public int deletePersonById(@PathVariable("id") UUID id) {
-        return personService.deletePersonById(id);
+    @DeleteMapping(path = "api/deletePost/{id}")
+    public int deletePostById(@PathVariable("id") int id) {
+        return personService.deletePostById(id);
     }
 
 

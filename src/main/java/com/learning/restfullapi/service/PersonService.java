@@ -1,42 +1,41 @@
 package com.learning.restfullapi.service;
 
-import com.learning.restfullapi.dao.PersonDao;
-import com.learning.restfullapi.model.Person;
+import com.learning.restfullapi.dao.Blog;
+import com.learning.restfullapi.model.Post;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.UUID;
 
 // Business logic for PersonService
 
 @Service
 public class PersonService {
-    private final PersonDao personDao;
+    private final Blog blog;
 
     @Autowired
-    public PersonService(@Qualifier("postgres") PersonDao personDao) {
-        this.personDao = personDao;
+    public PersonService(@Qualifier("blog") Blog post) {
+        this.blog = post;
     }
 
-    public int insertPerson(Person person) {
-        return personDao.insertPerson(person);
+    public int insertPost(Post post) {
+        return blog.insertPost(post);
     }
 
-    public List<Person> getAllPeople() {
-        return personDao.getALlPeople();
+    public List<Post> getPosts() {
+        return blog.getPosts();
     }
 
-    public Person getPersonById(UUID id) {
-        return personDao.getPersonById(id);
+    public Post getPostById(int id) {
+        return blog.getPostById(id);
     }
 
-    public int deletePersonById(UUID id) {
-        return personDao.deletePersonById(id);
+    public int deletePostById(int id) {
+        return blog.deletePostById(id);
     }
 
-    public void updatePersonById(UUID id, Person person) {
-        personDao.updatePersonById(id, person);
+    public void updatePostById(int id, Post post) {
+        blog.updatePostById(id, post);
     }
 }
