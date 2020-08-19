@@ -2,6 +2,7 @@ package com.learning.restfullapi.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 
@@ -11,11 +12,11 @@ public class Post {
     private String note;
     private String author;
     @JsonProperty("created_at")
-    private Date created_at = null;
+    private Timestamp created_at = null;
     @JsonProperty("updated_at")
-    private Date updated_at = null;
+    private Timestamp updated_at = null;
     @JsonProperty("deleted_at")
-    private Date deleted_at = null;
+    private Timestamp deleted_at = null;
 
     public Post(@JsonProperty("id") int id, @JsonProperty("author") String author, @JsonProperty("note") String note) {
         this.id = id;
@@ -43,15 +44,15 @@ public class Post {
         this.author = author;
     }
 
-    public void setCreatedAt(Date date) {
+    public void setCreatedAt(Timestamp date) {
         this.created_at = date;
     }
 
-    public void setUpdatedAt(Date date) {
+    public void setUpdatedAt(Timestamp date) {
         this.updated_at = date;
     }
 
-    public void setDeletedAt(Date deleted_at) {
+    public void setDeletedAt(Timestamp deleted_at) {
         this.deleted_at = deleted_at;
     }
 }

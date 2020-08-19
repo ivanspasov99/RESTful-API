@@ -17,5 +17,5 @@ public interface Blog {
 
     int deletePostById(int id);
 
-    void updatePostById(int id, Post post);
+    int updatePostById(int id, Post post);
 }

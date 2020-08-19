@@ -2,16 +2,17 @@ package com.learning.restfullapi.dao;
 
 import com.learning.restfullapi.model.Post;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
+
+
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
+
 import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.util.Date;
 import java.util.List;
+
 
 @Repository("blog")
 public class PersonDataAccessService implements Blog {
@@ -32,27 +33,40 @@ public class PersonDataAccessService implements Blog {
 
     @Override
     public List<Post> getPosts() {
-        final String sql = "SELECT * FROM \"Posts\"";
+        final String sql = "SELECT * FROM \"Posts\" WHERE deleted_at is null";
 
         return jdbc.query(sql, (res, i) -> getPostData(res));
     }
 
     @Override
     public Post getPostById(int id) {
-        final String sql = "SELECT * FROM \"Posts\" WHERE id = " + id;
+        final String sql = "SELECT * FROM \"Posts\" WHERE deleted_at is null and id = " + id;
 
-        Post post = jdbc.queryForObject(sql, (resultSet, i) -> getPostData(resultSet));
+        Post post;
+
+        try {
+            post = jdbc.queryForObject(sql, (resultSet, i) -> getPostData(resultSet));
+        } catch (DataAccessException e) {
+            return null;
+        }
+
         return post;
     }
 
     @Override
     public int deletePostById(int id) {
-        return 0;
+        final String sql = "UPDATE \"Posts\" SET deleted_at = current_timestamp WHERE id =" + id;
+
+        return jdbc.update(sql);
     }
 
     @Override
-    public void updatePostById(int id, Post post) {
+    public int updatePostById(int id, Post post) {
+        final String sql = "UPDATE \"Posts\" " +
+                "SET updated_at = current_timestamp," +
+                "author = ?, note = ? WHERE deleted_at is null and id = " + id;
 
+        return jdbc.update(sql, post.getAuthor(), post.getNote());
     }
 
     private Post getPostData(ResultSet res) throws SQLException {
@@ -62,9 +76,9 @@ public class PersonDataAccessService implements Blog {
 
         Post post = new Post(id, author, note);
 
-        post.setCreatedAt(res.getDate("created_at"));
-        post.setUpdatedAt(res.getDate("updated_at"));
-        post.setDeletedAt(res.getDate("deleted_at"));
+        post.setCreatedAt(res.getTimestamp("created_at"));
+        post.setUpdatedAt(res.getTimestamp("updated_at"));
+        post.setDeletedAt(res.getTimestamp("deleted_at"));
 
         return post;
     }
