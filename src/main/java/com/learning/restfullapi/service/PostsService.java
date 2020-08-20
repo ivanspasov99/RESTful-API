@@ -7,6 +7,7 @@ import com.learning.restfullapi.repository.PostsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
 import java.sql.Timestamp;
 
@@ -25,9 +26,10 @@ public class PostsService {
     }
 
     public Post insertPost(Post post) {
-        post.setCreatedAt(new Timestamp(System.currentTimeMillis()));
 
+        post.setCreatedAt(new Timestamp(System.currentTimeMillis()));
         return postsRepository.save(post);
+
     }
 
     public List<Post> getPosts() {
@@ -43,12 +45,14 @@ public class PostsService {
     }
 
     public Post updatePostById(int id, Post newPost) throws PostNotFoundException {
-        if(postsRepository.findById(id).isEmpty()) {
+        Optional<Post> post = postsRepository.findById(id);
+        if (post.isEmpty()) {
             throw new PostNotFoundException("There is no such post");
         }
 
         newPost.setId(id);
         newPost.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
+        newPost.setCreatedAt(post.get().getCreatedAt());
         return postsRepository.save(newPost);
     }
 }
