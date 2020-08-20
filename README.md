@@ -25,18 +25,18 @@
   
   # Operations - Requests
   
-  **1. GET:** *api/post*    getAllPosts
+  **1. GET:** *api/post*         -> getAllPosts
   
-  **2. GET:** *api/post/id*   getSpecificPost with id
+  **2. GET:** *api/post/id*      -> getSpecificPost with id
   
-  **3. POST:** *api/post*   create new post
+  **3. POST:** *api/post*        -> create new post
   
-  **4. PUT:** *api/post/id*    update existing post with id
+  **4. PUT:** *api/post/id*      -> update existing post with id
   
-  **5. DELETE:** *api/post/id*    delete post
+  **5. DELETE:** *api/post/id*   -> delete post
   
   
-  # Technologies
+  # Technologies Used
   1. Spring Boot 2.3.3
   2. Maven
   3. PostgreSQL
