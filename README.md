@@ -6,7 +6,7 @@
 ---
 
 # Requirements
-1.Java 14
+1. Java 14
 2. Maven
 3. PostgreSQL
 
