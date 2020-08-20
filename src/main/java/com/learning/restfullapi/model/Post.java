@@ -6,20 +6,22 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import javax.persistence.Table;
 import javax.validation.constraints.Pattern;
 
 import java.sql.Timestamp;
 
 @Entity
-public class Posts {
+@Table(name = "posts")
+public class Post {
 
     @Id @GeneratedValue private int id;
     @NonNull private String note;
-    @Pattern(regexp = "^[a-zA-Z1-9]*$") @NonNull private String author;
+    @Pattern(regexp = "^[a-zA-Z1-9]+.*$") @NonNull private String author;
     private Timestamp created_at = null;
     private Timestamp updated_at = null;
 
-    public Posts() {}
+    public Post() {}
 
     public int getId() {
         return id;

@@ -1,14 +1,13 @@
 package com.learning.restfullapi.service;
 
+import com.learning.restfullapi.exceptions.PostNotFoundException;
+import com.learning.restfullapi.model.Post;
 import com.learning.restfullapi.repository.PostsRepository;
-import com.learning.restfullapi.model.Posts;
 
-import org.aspectj.lang.annotation.DeclareError;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
+import javax.validation.Valid;
 import java.sql.Timestamp;
 
 import java.util.List;
@@ -25,16 +24,17 @@ public class PostsService {
         this.postsRepository = postsRepository;
     }
 
-    public Posts insertPost(Posts posts) {
-        posts.setCreatedAt(new Timestamp(System.currentTimeMillis()));
-        return postsRepository.save(posts);
+    public Post insertPost(Post post) {
+        post.setCreatedAt(new Timestamp(System.currentTimeMillis()));
+
+        return postsRepository.save(post);
     }
 
-    public List<Posts> getPosts() {
+    public List<Post> getPosts() {
         return postsRepository.findAll();
     }
 
-    public Optional<Posts> getPostById(int id) {
+    public Optional<Post> getPostById(int id) {
         return postsRepository.findById(id);
     }
 
@@ -42,10 +42,13 @@ public class PostsService {
         postsRepository.deleteById(id);
     }
 
-    public Posts updatePostById(int id, Posts newPosts) {
-        // needs improvement, with status code and checking if post exist
-        newPosts.setId(id);
-        newPosts.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
-        return postsRepository.save(newPosts);
+    public Post updatePostById(int id, Post newPost) throws PostNotFoundException {
+        if(postsRepository.findById(id).isEmpty()) {
+            throw new PostNotFoundException("There is no such post");
+        }
+
+        newPost.setId(id);
+        newPost.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
+        return postsRepository.save(newPost);
     }
 }
