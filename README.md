@@ -10,7 +10,7 @@
 3. PostgreSQL
 
 > PostgreSQL needs to be configured manual
-> 1. Download form https://www.postgresql.org/
+> 1. Download form [title] (https://www.postgresql.org/)
 > 2. Run DB on Port-5432
 > 3. Fill these line in your application.properties after you clone the repository
 >   - spring.datasource.url=jdbc:postgresql://localhost:5432/Blog>   
@@ -25,7 +25,7 @@
   
   # Operations - Requests
   
-  **1. GET:** *api/post*         -> getAllPosts
+  **1. GET:** *api/post* &nbsp         -> getAllPosts
   
   **2. GET:** *api/post/id*      -> getSpecificPost with id
   
