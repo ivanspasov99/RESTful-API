@@ -3,7 +3,6 @@
 ---
 
 ## Setup
----
 
 # Requirements
 1. Java 14
@@ -20,3 +19,20 @@
   
   # Run
   1. Clone the repository
+  2. Run mv - is it necesseary
+  3. Call localhost:8080/api/post
+  
+  
+  # Operations - Requests
+  
+  **1. GET:** api/post > // getAllPosts
+  **2. GET:** api/post/id > // getSpecificPost with id
+  **3. POST:** api/post > // create new post
+  **4. PUT:** api/post/id > // update existing post with id
+  **5. DELETE:** api/post/id > // delete post
+  
+  
+  # Technologies
+  1. Spring Boot 2.3.3
+  2. Maven
+  3. PostgreSQL
