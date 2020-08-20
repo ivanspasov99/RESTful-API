@@ -25,11 +25,15 @@
   
   # Operations - Requests
   
-  **1. GET:** *api/post*   // getAllPosts
-  **2. GET:** *api/post/id*   // getSpecificPost with id
-  **3. POST:** *api/post*   // create new post
-  **4. PUT:** *api/post/id*    // update existing post with id
-  **5. DELETE:** *api/post/id*    // delete post
+  **1. GET:** *api/post*    getAllPosts
+  
+  **2. GET:** *api/post/id*   getSpecificPost with id
+  
+  **3. POST:** *api/post*   create new post
+  
+  **4. PUT:** *api/post/id*    update existing post with id
+  
+  **5. DELETE:** *api/post/id*    delete post
   
   
   # Technologies
