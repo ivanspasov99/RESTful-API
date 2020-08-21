@@ -11,10 +11,14 @@
 
 > PostgreSQL needs to be configured manual
 > 1. Download form https://www.postgresql.org/
-> 2. Run for Mac `postgres -D brew services start postgresql`
-> 3. Run for Windows `postgres -D /usr/local/pgsql/data`
+> 2. Run for Mac 
+>
+>     `brew install postgresql`
 
-  
+>     `brew services start postgresql`
+
+>     `createdb -h localhost -p 5432 Blog`
+
   # Run
   1. Clone the repository
   2. Run mvn spring-boot:run

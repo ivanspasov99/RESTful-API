@@ -20,7 +20,7 @@ import static org.junit.Assert.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-// properties
+// properties for internal database
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest

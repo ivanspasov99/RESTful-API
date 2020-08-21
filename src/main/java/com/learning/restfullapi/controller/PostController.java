@@ -16,11 +16,11 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping
-public class PersonController {
+public class PostController {
     private final PostsService postsService;
 
     @Autowired // it is declared by default, only on constructors
-    public PersonController(PostsService postsService) {
+    public PostController(PostsService postsService) {
         this.postsService = postsService;
     }
 
