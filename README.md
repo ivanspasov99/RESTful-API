@@ -1,6 +1,6 @@
 ### RESTful-API
+
 *This is my first intro learning project at SAP Labs Bulgaria*
----
 
 ## Setup
 
@@ -11,20 +11,17 @@
 
 > PostgreSQL needs to be configured manual
 > 1. Download form https://www.postgresql.org/
-> 2. Run DB on Port-5432
-> 3. Fill these line in your application.properties after you clone the repository
->   - spring.datasource.url=jdbc:postgresql://localhost:5432/Blog>   
->   - spring.datasource.username=<fill it if you want>
->   - spring.datasource.password=<fill it if you want>
+> 2. Run for Mac `postgres -D brew services start postgresql`
+> 3. Run for Windows `postgres -D /usr/local/pgsql/data`
+
   
   # Run
   1. Clone the repository
-  2. Run mv - is it necesseary
+  2. Run mvn spring-boot:run
   3. Call localhost:8080/api/post
   
   
   # Operations - Requests
-  
   **1. GET:** *api/post*         -> getAllPosts
   
   **2. GET:** *api/post/id*      -> getSpecificPost with id
