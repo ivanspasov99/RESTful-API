@@ -3,14 +3,10 @@ package com.learning.restfullapi.service;
 import com.learning.restfullapi.exceptions.PostNotFoundException;
 import com.learning.restfullapi.model.Post;
 import com.learning.restfullapi.repository.PostsRepository;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.sql.Timestamp;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -44,12 +40,14 @@ public class PostsService {
         return post;
     }
 
-    public void deletePostById(int id) throws PostNotFoundException {
+    public Post deletePostById(int id) throws PostNotFoundException {
         Optional<Post> post = postsRepository.findById(id);
 
         validatePostNotFoundException(post);
 
         postsRepository.deleteById(id);
+
+        return post.get();
     }
 
     public Post updatePostById(int id, Post newPost) throws PostNotFoundException {
@@ -57,11 +55,13 @@ public class PostsService {
 
         validatePostNotFoundException(post);
 
-        newPost.setId(id);
-        newPost.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
-        newPost.setCreatedAt(post.get().getCreatedAt());
+        //pos.setId(id);
+        post.get().setAuthor(newPost.getAuthor());
+        post.get().setNote(newPost.getNote());
+        post.get().setUpdatedAt(new Timestamp(System.currentTimeMillis()));
+        post.get().setCreatedAt(post.get().getCreatedAt());
 
-        return postsRepository.save(newPost);
+        return postsRepository.saveAndFlush(post.get());
     }
 
     private void validatePostNotFoundException(Optional<Post> post) throws PostNotFoundException {

@@ -6,9 +6,9 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @EnableSwagger2
 @SpringBootApplication
-public class RestfullapiApplication {
+public class RestfulApi {
 
     public static void main(String[] args) {
-        SpringApplication.run(RestfullapiApplication.class, args);
+        SpringApplication.run(RestfulApi.class, args);
     }
 }
