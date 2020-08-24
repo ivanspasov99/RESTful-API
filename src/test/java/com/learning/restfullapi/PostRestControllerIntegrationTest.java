@@ -42,6 +42,7 @@ class PostRestControllerIntegrationTest {
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().is(200))
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect()
                 .andReturn();
 
         String response = res.getResponse().getContentAsString();

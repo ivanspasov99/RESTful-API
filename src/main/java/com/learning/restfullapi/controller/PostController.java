@@ -7,8 +7,6 @@ import com.learning.restfullapi.service.PostsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-
-import javax.validation.ConstraintViolationException;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,7 +33,7 @@ public class PostController {
     }
 
     @DeleteMapping("api/post/{id}")
-    public void deletePostById(@PathVariable("id") int id) {
+    public void deletePostById(@PathVariable("id") int id) throws PostNotFoundException {
         postsService.deletePostById(id);
     }
 
@@ -45,7 +43,7 @@ public class PostController {
     }
 
     @GetMapping("api/post/{id}")
-    public Optional<Post> getPostById(@PathVariable("id") int id) {
+    public Optional<Post> getPostById(@PathVariable("id") int id) throws PostNotFoundException {
         return postsService.getPostById(id);
     }
 
