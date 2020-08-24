@@ -1,5 +1,6 @@
 package com.learning.restfullapi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.lang.NonNull;
 
 import javax.persistence.Entity;
@@ -18,8 +19,9 @@ public class Post {
     @Id @GeneratedValue private int id;
     @NonNull private String note;
     @Pattern(regexp = "^[a-zA-Z1-9]+.*$") @NonNull private String author;
-    private Timestamp created_at = null;
-    private Timestamp updated_at = null;
+
+    private Timestamp createdAt = null;
+    private Timestamp updatedAt = null;
 
     public Post() {}
 
@@ -36,11 +38,11 @@ public class Post {
     }
 
     public Timestamp getUpdatedAt() {
-        return updated_at;
+        return updatedAt;
     }
 
     public Timestamp getCreatedAt() {
-        return created_at;
+        return createdAt;
     }
 
     public void setNote(String note) {
@@ -52,11 +54,11 @@ public class Post {
     }
 
     public void setCreatedAt(Timestamp date) {
-        this.created_at = date;
+        this.createdAt = date;
     }
 
     public void setUpdatedAt(Timestamp date) {
-        this.updated_at = date;
+        this.updatedAt = date;
     }
 
     public void setId(int id) {
