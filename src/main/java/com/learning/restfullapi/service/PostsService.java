@@ -41,32 +41,31 @@ public class PostsService {
     }
 
     public Post deletePostById(int id) throws PostNotFoundException {
-        Optional<Post> post = postsRepository.findById(id);
+        Optional<Post> optionalPost = postsRepository.findById(id);
 
-        validatePostNotFoundException(post);
+        Post post = validatePostNotFoundException(optionalPost);
 
         postsRepository.deleteById(id);
 
-        return post.get();
+        return post;
     }
 
     public Post updatePostById(int id, Post newPost) throws PostNotFoundException {
-        Optional<Post> post = postsRepository.findById(id);
+        Optional<Post> optionalPost = postsRepository.findById(id);
 
-        validatePostNotFoundException(post);
+        Post post = validatePostNotFoundException(optionalPost);
 
-        //pos.setId(id);
-        post.get().setAuthor(newPost.getAuthor());
-        post.get().setNote(newPost.getNote());
-        post.get().setUpdatedAt(new Timestamp(System.currentTimeMillis()));
-        post.get().setCreatedAt(post.get().getCreatedAt());
+        post.setAuthor(newPost.getAuthor());
+        post.setNote(newPost.getNote());
+        post.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
 
-        return postsRepository.saveAndFlush(post.get());
+        return postsRepository.saveAndFlush(post);
     }
 
-    private void validatePostNotFoundException(Optional<Post> post) throws PostNotFoundException {
+    private Post validatePostNotFoundException(Optional<Post> post) throws PostNotFoundException {
         if (post.isEmpty()) {
             throw new PostNotFoundException("There is no such post");
         }
+        return post.get();
     }
 }

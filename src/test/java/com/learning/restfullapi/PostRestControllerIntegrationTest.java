@@ -1,14 +1,10 @@
 package com.learning.restfullapi;
 
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.learning.restfullapi.exceptions.PostNotFoundException;
 import com.learning.restfullapi.model.Post;
 import com.learning.restfullapi.repository.PostsRepository;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.exceptions.base.MockitoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,18 +13,14 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
-import javax.print.attribute.standard.Media;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
-// properties for internal database
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -69,7 +61,20 @@ class PostRestControllerIntegrationTest {
     }
 
     @Test
-    public void testGetAllPostsWithStatus404() throws Exception {
+    public void testGetAllPostsThatReturnEmptyListWithStatus200() throws Exception {
+        List<Post> list = new ArrayList<>();
+
+        when(repository.findAll()).thenReturn(list);
+
+        mvc.perform(get("/api/post")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().is(200))
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.length()").value(0));
+    }
+
+    @Test
+    public void testGetAllPostsWithStatus200() throws Exception {
         List<Post> list = new ArrayList<>();
         list.add(new Post());
         list.add(new Post());
@@ -82,6 +87,7 @@ class PostRestControllerIntegrationTest {
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.length()").value(2));
     }
+
 
     @Test
     public void testAddPostToRepositoryWithStatus200() throws Exception {
@@ -141,7 +147,16 @@ class PostRestControllerIntegrationTest {
 
     }
 
-    // almost the same as GET??
+    @Test
+    public void testUpdatePostFromRepositoryWithInvalidData() throws Exception {
+        mvc.perform(put("/api/post/1")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"author\":\"\",\"note\":\"text2\"}"))
+                .andExpect(status().is(406))
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.message").value("Not Valid Input"));
+    }
+
     @Test
     public void testDeletePostFromRepository() throws Exception {
         Post post = new Post();

@@ -5,6 +5,7 @@ import com.learning.restfullapi.model.Post;
 import com.learning.restfullapi.service.PostsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.PersistenceException;
@@ -16,6 +17,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping
+//@Validated
 public class PostController {
     private final PostsService postsService;
 
@@ -26,8 +28,7 @@ public class PostController {
 
     @PostMapping("api/post")
     public Post insertPost(@Valid @RequestBody Post post, BindingResult bindingResult) {
-        // this could go to PostService
-        if(bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors()) {
             throw new PersistenceException();
         }
         return postsService.insertPost(post);
@@ -35,8 +36,7 @@ public class PostController {
 
     @PutMapping("api/post/{id}")
     public Post updatePostById(@PathVariable("id") int id, @Valid @RequestBody Post post, BindingResult bindingResult) throws PostNotFoundException {
-        // this could go to PostService
-        if(bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors()) {
             throw new PersistenceException();
         }
         return postsService.updatePostById(id, post);
