@@ -1,6 +1,5 @@
 package com.learning.restfullapi;
 
-
 import com.learning.restfullapi.model.Post;
 import com.learning.restfullapi.repository.PostsRepository;
 import org.junit.jupiter.api.Test;
@@ -32,7 +31,6 @@ class PostRestControllerIntegrationTest {
 
     @MockBean
     private PostsRepository repository;
-
 
     @Test
     public void testGetPostByIdWithStatus200() throws Exception {
