@@ -2,8 +2,6 @@
 
 *This is my first intro learning project at SAP Labs Bulgaria*
 
-## Setup
-
 # Requirements
 1. Docker
 
