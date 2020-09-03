@@ -17,7 +17,7 @@ ARG version
 WORKDIR /app
 
 # Copy the created .jar file from stage 1, so we can run it in stage 2 container
-COPY --from=builder /build/target/restfullapi-${version}.jar /app/restfullapi.jar
+COPY --from=builder /build/target/restfullapi-1.0.0.jar /app/restfullapi.jar
 
 # on witch port to expose the container
 EXPOSE 8080
