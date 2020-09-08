@@ -17,7 +17,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping
-@CrossOrigin(origins = "http://localhost9000", maxAge = 3600)
+@CrossOrigin(origins = "http://localhost:9000", maxAge = 3600)
 public class PostController {
     private final PostsService postsService;
 
