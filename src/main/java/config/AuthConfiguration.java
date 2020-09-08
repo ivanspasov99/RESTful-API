@@ -26,7 +26,7 @@ public class AuthConfiguration extends WebSecurityConfigurerAdapter {
         // CORS configuration
 
         // This value must be parameterized according to your application needs
-        final String corsOrigin="http://localhost:8080";
+        final String corsOrigin="http://localhost:9000";
         // The idea is to insert the CORS filter before the filter injected by
         // the @EnableOAuth2Sso annotation
         http.addFilterBefore(new CorsFilter(corsConfigurationSource(corsOrigin)), AbstractPreAuthenticatedProcessingFilter.class);

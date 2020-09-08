@@ -20,7 +20,7 @@ WORKDIR /app
 COPY --from=builder /build/target/restfullapi-1.0.0.jar /app/restfullapi.jar
 
 # on witch port to expose the container
-EXPOSE 8080
+EXPOSE 9000
 
 # command
 ENTRYPOINT ["java"]
