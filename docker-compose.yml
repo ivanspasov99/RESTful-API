@@ -5,7 +5,7 @@ services:
       container_name: postgres
       image: postgres
       environment:
-        POSTGRES_HOST: posgres
+        POSTGRES_HOST: postgres
         POSTGRES_PASSWORD: 123456
         POSTGRES_USERNAME: postgres
       # we can save the data even we kill the container
