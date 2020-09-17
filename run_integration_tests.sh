@@ -1,3 +1,3 @@
-#!/bin/bash
+#!/bin/sh
 
 sudo mvn clean test
