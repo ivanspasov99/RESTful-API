@@ -1,3 +1,3 @@
 #!/bin/sh
 
-sudo mvn clean test
+mvn clean test
