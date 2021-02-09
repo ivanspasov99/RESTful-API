@@ -16,7 +16,6 @@ jobs:
       - name: Echo Dir
         run: |
           echo .
-          $(pwd)
 
 #      - name: Set up QEMU
 #        uses: docker/setup-qemu-action@v1
