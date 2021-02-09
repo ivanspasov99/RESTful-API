@@ -48,6 +48,6 @@ jobs:
           namespace: 'default'
           # Path to manifest files
           manifests: |
-            Deployment.yaml
-            Service.yaml
+            manifest/Deployment.yaml
+            manifest/Service.yaml
           images: 'ivanspasov/springbootapi:latest'
