@@ -12,10 +12,8 @@ jobs:
   login:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-
-      - name: Echo Dir
-        run: ls -l
+      - name: Checkout at master folder structure
+        uses: actions/checkout@master
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
