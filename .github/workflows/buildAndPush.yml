@@ -25,15 +25,15 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_Password }}
 
-        - name: Build and push
-          id: docker_build
-          uses: docker/build-push-action@v2
-          with:
-            push: true
-            tags: ivanspasov/springbootapi:latest
-            build-args: |
-              arg1=value1
-              arg2=value2
+      - name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: ivanspasov/springbootapi:latest
+          build-args: |
+            arg1=value1
+            arg2=value2
 
-        - name: Image digest
-          run: echo ${{ steps.docker_build.outputs.digest }}
+      - name: Image digest
+        run: echo ${{ steps.docker_build.outputs.digest }}
