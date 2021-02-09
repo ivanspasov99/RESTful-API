@@ -12,6 +12,7 @@ jobs:
   login:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@master
 
       - name: Echo Dir
         run: ls -l
