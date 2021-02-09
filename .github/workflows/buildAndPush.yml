@@ -31,9 +31,23 @@ jobs:
         with:
           push: true
           tags: ivanspasov/springbootapi:latest
-          build-args: |
-            arg1=value1
-            arg2=value2
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
+
+      - name: Set Context in K8s cluster
+        uses: azure/k8s-set-context@v1
+        with:
+          method: kubeconfig
+          kubeconfig: ${{ secrets.KUBECONFIG }}
+        id: setcontext
+
+      - name: Deploy in k8s cluster
+        uses: Azure/k8s-deploy@v1.3
+        with:
+          namespace: 'default'
+          # Path to manifest files
+          manifests: |
+            Deployment.yaml
+            Service.yaml
+          images: 'ivanspasov/springbootapi:latest'

@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: simple-golang-api-service
+spec:
+  # when the type is Cluster ip- port-forward is needed
+  type: LoadBalancer
+  selector:
+    app: simple-golang-api
+  ports:
+    - port: 9000 # where to accept requests
+      targetPort: 8080 # where to send requests

@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simple-golang-api-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: simple-golang-api
+  template:
+    metadata:
+      name: simple-golang-api-pod
+      labels:
+        app: simple-golang-api
+    spec:
+      containers:
+        - name: simple-golang-api
+          image: ivanspasov/springbootapi:latest
+          ports:
+            - containerPort: 8080
